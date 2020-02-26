@@ -122,3 +122,8 @@ main {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+
+.actions {
+  padding-top: 30px;
+}

@@ -43,9 +43,10 @@ export class AddNotesForm extends Component {
                basic
                size="large"
              >
-               <section className="ui-form">
-                 <div className="form-group">
-                   <div class="ui input">
+               <section>
+                <h3>Add New Note</h3>
+                 <form class="ui form">
+                   <div class="field">
                      <input
                        type="text"
                        value={this.state.title}
@@ -53,23 +54,26 @@ export class AddNotesForm extends Component {
                        placeholder="Enter Title"
                      />
                    </div>
-                 </div>
+                   <div class="field">
+                     <textarea
+                       value={this.state.note}
+                       onChange={evt => this.onChangeHandler(evt, "note")}
+                       placeholder="Enter Note"
+                       rows="3"
+                     />
 
-                 <textarea
-                   value={this.state.note}
-                   onChange={evt => this.onChangeHandler(evt, "note")}
-                   placeholder="Enter Note"
-                 />
-
-                 <Modal.Actions>
-                   <Button
-                     color="green"
-                     inverted
-                     onClick={evt => this.createNote()}
-                   >
-                     <Icon name="checkmark" /> Save
-                   </Button>
-                 </Modal.Actions>
+                     <div class="field"></div>
+                   </div>
+                 </form>
+                  <Modal.Actions>
+                    <Button
+                      color="green"
+                      inverted
+                      onClick={evt => this.createNote()}
+                    >
+                      <Icon name="checkmark" /> Save
+                    </Button>
+                  </Modal.Actions>
                </section>
              </Modal>
            );
