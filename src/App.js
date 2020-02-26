@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as firebase from "firebase";
 
 import Header from "./components/Header";
-import NotesForm from "./components/NotesForm";
+import Footer from "./components/Footer";
 import Notes from "./components/Notes";
 
 class App extends Component {
@@ -53,9 +53,9 @@ class App extends Component {
       <div className="App">
         <Header />
         <main>
-          <NotesForm />  
           <Notes notes={this.state.notes} />
         </main>
+        <Footer />
       </div>
     );
   }

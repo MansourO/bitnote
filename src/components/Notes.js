@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
+import EditNotesForm from "./EditNotesForm";
 
 
 export class Notes extends Component {
@@ -11,50 +12,89 @@ export class Notes extends Component {
              search: ""
            };
 
-           this.filterNotes = this.filterNotes.bind(this)
+           this.filterNotes = this.filterNotes.bind(this);
+
          }
 
-         removeNote(id) {
+         removeNote = (id) => {
            firebase
              .database()
              .ref("notes")
              .child(id)
              .remove();
+
+           
+             let notes = this.state.notes.filter(item => item.id != id)
+
+             this.setState({
+               notes: notes
+             });
+
          }
 
-          onSearchChangeHandler(evt, key) {
-            this.setState({
-              [key]: evt.target.value
-            });
+         onSearchChangeHandler(evt, key) {
+           this.setState({
+             [key]: evt.target.value
+           });
 
-            this.filterNotes(evt.target.value);
-          }
+           this.filterNotes(evt.target.value);
+         }
 
-         filterNotes(searchValue){
-           
-            console.log(searchValue);
+         filterNotes(searchValue) {
+           let notes = this.props.notes.filter(
+             note =>
+               note.title.includes(searchValue) ||
+               note.note.includes(searchValue)
+           );
 
-            let notes = this.props.notes.filter(note => 
-              note.title.includes(searchValue)
-            )
+           this.setState({
+             notes: notes
+           });
+         }
 
-            this.setState({
-              notes: notes
-            });
+         keyPressed = (event) => {
+           if (event.key === "Enter") {
+
+              console.log(event);
+
+              if(this.state.notes.length == 0){
+
+                let newNote = {
+                  id: 0,
+                  title: event.target.value,
+                  note: ''
+                }
+
+                let notes = []
+                notes.push(newNote);
+
+                firebase
+                  .database()
+                  .ref("notes")
+                  .push(newNote);
+
+
+                   this.setState({
+                     notes: notes
+                   });
+              }
+           }
          }
 
          render() {
            return (
+             //Search Bar
              <section className="notes-wrapper">
-               <h3>Notes</h3>
                <section className="searchform">
-                 <div className="form-group">
+                 <div className="ui big icon input">
                    <input
                      type="text"
                      id="search-bar"
                      name="search-bar"
                      value={this.state.search}
                      onChange={evt => this.onSearchChangeHandler(evt, "search")}
+                     onKeyPress={this.keyPressed}
+                     placeholder="Search Notes..."
                    />
                  </div>
                </section>
@@ -72,6 +112,13 @@ export class Notes extends Component {
                      </div>
                      <div className="note-content">
                        <p>{note.note}</p>
+                     </div>
+                     <div className="note-title">
+                       <EditNotesForm
+                         id={note.id}
+                         title={note.title}
+                         note={note.note}
+                       />
                      </div>
                    </div>
                  ))}
