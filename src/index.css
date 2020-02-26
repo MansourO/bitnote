@@ -1,6 +1,5 @@
 /* TODO: Remove for bootstrap */
 
-
 main {
   padding: 15px;
 }
@@ -12,9 +11,11 @@ main {
 .header {
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   background: #171717;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+  width: 100vw;
+  height: 60px;
 }
 
 .footer {
@@ -35,17 +36,9 @@ main {
   text-transform: uppercase;
 }
 
-
 /*
 ** NOTE FORM
 */
-
-.noteform {
-  display: block;
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto 15px;
-}
 
 .searchform {
   display: block;

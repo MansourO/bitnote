@@ -32,12 +32,11 @@ export class AddNotesForm extends Component {
           }          
          }
 
-   
          render() {
            return (
              <Modal
                trigger={
-                 <button className="big ui icon button addNoteBtn">
+                 <button className="huge ui icon button addNoteBtn">
                    <i className="sticky note outline icon"></i>
                  </button>
                }
@@ -45,7 +44,6 @@ export class AddNotesForm extends Component {
                size="large"
              >
                <section className="ui-form">
-                 
                  <div className="form-group">
                    <div class="ui input">
                      <input

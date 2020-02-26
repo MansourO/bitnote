@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import * as firebase from "firebase";
 
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import Notes from "./components/Notes";
+import AddNotesForm from "./components/AddNotesForm";
 
 class App extends Component {
   constructor() {
@@ -53,9 +53,13 @@ class App extends Component {
       <div className="App">
         <Header />
         <main>
-          <Notes notes={this.state.notes} />
+          <div>
+            <Notes notes={this.state.notes} />
+          </div>
+          <div align="right">
+            <AddNotesForm />
+          </div>
         </main>
-        <Footer />
       </div>
     );
   }
