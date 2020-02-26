@@ -1,5 +1,5 @@
-
 /* TODO: Remove for bootstrap */
+
 body {
   margin: 0;
   padding: 0;
@@ -44,6 +44,13 @@ main {
 */
 
 .noteform {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto 15px;
+}
+
+.searchform {
   display: block;
   width: 100%;
   max-width: 480px;
