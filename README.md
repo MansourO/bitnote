@@ -1,68 +1,90 @@
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
-
-In the project directory, you can run:
-
 ### `yarn start`
+`build`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `yarn test`
+## BitNote
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This is a simple appliction that creates and manages notes simliar to Apple Notes or nvAlt.
 
-### `yarn build`
+![Alt Text](https://media.giphy.com/media/cPHVxt5ynNzSoexJ3T/giphy.gif)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Main Features
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* Shows a list of notes
+* Saves app states as user enters information
+* Search Bar to filter through list of notes
+* Ability to create a new note by hitting enter if no notes are found
+* Support Markdown
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Tech Stack
 
-### `yarn eject`
+The main technologies used to build this application are as follows
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* React
+* HTML/CSS/Javasript
+* Semantic UI
+* Firebase
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Functionality Specs
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### `UI Components`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The application main components are comprised of three main react components
+* NotesList.js - The main view of the application and comprises of a list of notes handles filtering through and displaying the list of notes and it's states
+* AddNotesForm.js - Handles updating the list of notes for any new notes that occur and it's states
+* EditNotesForm.js - Handles updating existing single notes within the list of notes and its' states
 
-## Learn More
+In addition the application leverages Semantic UI which has prebuilt components as to speed up some development time. More can be learned [here](https://react.semantic-ui.com/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `State Components`
 
-### Code Splitting
+The application is able to handle intermediate states as things change on the UI. It leverages the state objects already built in with react. Some of the common ways to 
+update state are as follows. Bitnote leverages this.setState in multiple ways to handle this.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+    onFieldChange = (evt, key) => {
+        this.setState({
+        [key]: evt.target.value
+        });
+    }
 
-### Analyzing the Bundle Size
+More about this in the react documentation [here](https://reactjs.org/docs/state-and-lifecycle.html)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### `Persistance Components`
 
-### Making a Progressive Web App
+For persistance we are using firebase you will need to create a real time database. The basic is that it is wired up to the index.js in the context of the applciation. 
+Refer to the index.js file for the actual config example.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+    const config = {
+        apiKey: "",
+        authDomain: "",
+        databaseURL: "",
+        projectId: "",
+        storageBucket: "",
+        messagingSenderId: "",
+        appId: "",
+        measurementId: ""
+    };
 
-### Advanced Configuration
+    // Initialize Firebase
+    firebase.initializeApp(config);
+    firebase.analytics();
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+It is then being injected into the application through various components but mainly the App.js is leveraging firebase to create, update, delete from the real time database.
 
-### Deployment
+    this.db.ref("notes")
+            .push({
+            title: this.state.title,
+            note: this.state.note
+    });
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+You can learn more about how to use fire base [here](https://firebase.google.com/docs/storage/web/start)
 
-### `yarn build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
