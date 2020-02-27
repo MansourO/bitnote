@@ -6,7 +6,8 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
 import EditNotesForm from "./EditNotesForm";
-import ReactMarkdown from 'react-markdown'
+import NoteMarkDown from "./NoteMarkDown";
+import Truncate from "react-truncate";
 
 
 export class NoteList extends Component {
@@ -85,12 +86,17 @@ export class NoteList extends Component {
             <div className="note" key={note.id}>
               <div className="note-title">
                 <h3>{note.title}</h3>
-                <div className="remove" onClick={() => this.onRemoveNote(note.id)}>
-                x
+                <div
+                  className="remove"
+                  onClick={() => this.onRemoveNote(note.id)}
+                >
+                  x
                 </div>
               </div>
               <div className="note-content">
-                <ReactMarkdown source={note.note} />
+                <Truncate lines={1} >
+                  {note.note}
+                </Truncate>
               </div>
               <div className="note-title">
                 <EditNotesForm
@@ -98,6 +104,7 @@ export class NoteList extends Component {
                   title={note.title}
                   note={note.note}
                 />
+                <NoteMarkDown note={note.note}/>
               </div>
             </div>
           ))}
