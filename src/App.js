@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as firebase from "firebase";
 
 import Header from "./components/Header";
-import Notes from "./components/Notes";
+import NoteList from "./components/NoteList";
 import AddNotesForm from "./components/AddNotesForm";
 
 class App extends Component {
@@ -21,7 +21,7 @@ class App extends Component {
 
   listenForChange() {
 
-    //Add Note
+    //Detect addition of new note
     this.db.ref("notes").on("child_added", snapshot => {
       let note = {
         id: snapshot.key,
@@ -37,7 +37,7 @@ class App extends Component {
       });
     });
 
-    //Remove Note Action
+    //detect removal of note
     this.db.ref("notes").on("child_removed", snapshot => {
       let notes = this.state.notes;
       notes = notes.filter(note => note.id !== snapshot.key);
@@ -54,7 +54,7 @@ class App extends Component {
         <Header />
         <main>
           <div>
-            <Notes notes={this.state.notes} />
+            <NoteList notes={this.state.notes} />
           </div>
           <div align="right">
             <AddNotesForm />

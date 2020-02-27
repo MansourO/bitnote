@@ -1,11 +1,15 @@
-/* TODO: Remove for bootstrap */
+/*
+** App Styles
+** General app styles for application
+*/
 
 main {
   padding: 15px;
 }
 
 /*
-** HEADER 
+** Header Styles
+** Handles header component styles
 */
 
 .header {
@@ -18,17 +22,6 @@ main {
   height: 60px;
 }
 
-.footer {
-  width: 100vw;
-  height: 60px;
-  background: #171717;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
 .header .title {
   color: #FFCE00;
   font-size: 28px;
@@ -37,7 +30,8 @@ main {
 }
 
 /*
-** NOTE FORM
+** Search form Styles
+** Handles styles for search form
 */
 
 .searchform {
@@ -47,18 +41,9 @@ main {
   margin: 0 auto 15px;
 }
 
-.noteform h3 {
-  color: #171717;
-}
-
-.noteform .form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-}
-
 /*
-** NOTES LIST
+** Note List Styles
+** Handles styles for NoteList Component
 */
 
 .notes {
@@ -97,6 +82,11 @@ main {
   padding: 15px;
 }
 
+/*
+** Semantic UI Custome styles
+** Handles moditifcation to Semantic UI
+*/
+
 .ui.input {
   position: relative;
   font-weight: 400;
@@ -106,24 +96,22 @@ main {
   width: 100%;
 }
 
+.actions {
+  padding-top: 30px;
+}
+
+/*
+** Custom Button Styles
+** Handles custom modifications for buton styles
+*/
+
 .addNoteBtn {
   background-color: black !important;
   color: white !important;
-}
-
-.wrapper {
-  min-height: 100%;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
 }
 
 @media screen and (min-width: 768px) {
   .notes {
     grid-template-columns: repeat(3, 1fr);
   }
-}
-
-
-.actions {
-  padding-top: 30px;
 }

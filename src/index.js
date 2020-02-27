@@ -7,7 +7,7 @@ import * as firebase from 'firebase';
 import "semantic-ui-css/semantic.min.css";
 
 
- // Your web app's Firebase configuration
+ // Fire Base Connection Configuration
   const config = {
     apiKey: "AIzaSyAUxSQQyvQo4MejPf-ZMFkrtKscgYt70MM",
     authDomain: "bitnote-49190.firebaseapp.com",
@@ -18,11 +18,12 @@ import "semantic-ui-css/semantic.min.css";
     appId: "1:176955867904:web:36e519145d5dcc29eb69e5",
     measurementId: "G-FH3Y2YH0LZ"
   };
+
   // Initialize Firebase
   firebase.initializeApp(config);
   firebase.analytics();
 
-
+  
   ReactDOM.render(<App />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change

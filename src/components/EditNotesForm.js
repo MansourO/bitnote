@@ -5,77 +5,63 @@ import { Button, Header, Icon, Modal } from "semantic-ui-react";
 
 export class EditNotesForm extends Component {
          
-        constructor(props) {
-           super(props);
-           this.state = {
-             id: this.props.id,
-             title: this.props.title,
-             note: this.props.note
-           };
+constructor(props) {
+    super(props);
 
+    this.db = firebase.database();
+    this.state = {
+      id: this.props.id,
+      title: this.props.title,
+      note: this.props.note
+    };
+  }
 
-         }
-         onChangeHandler(evt, key) {
-           
-          this.setState({
-             [key]: evt.target.value
-           });
+  onFieldChange= (evt, key) => {
+    this.setState({
+        [key]: evt.target.value
+    });
+  }
 
-         }
+  onNoteUpdate = () => {
+    let updatedNote = {
+      title: this.state.title,
+      note: this.state.note
+    };
 
-         updateNote(){
-    
+    this.db.ref("notes/" + this.state.id)
+        .set(updatedNote);
+  }
 
-            let updatedNote = {
-              title: this.state.title,
-              note: this.state.note
-            };
-
-             firebase
-               .database()
-               .ref("notes/" + this.state.id)
-               .set(updatedNote);
-         }
-
-         render() {
-           return (
-             <Modal trigger={<Button>Edit</Button>} basic size="small">
-               <section className="noteform">
-                 <div className="form-group">
-                   <label htmlFor="noteform-title">Title</label>
-                   <input
-                     type="text"
-                     id="noteform-title"
-                     name="noteform-title"
-                     value={this.state.title}
-                     onChange={evt => this.onChangeHandler(evt, "title")}
-                   />
-                 </div>
-                 <div className="form-group">
-                   <label htmlFor="noteform-noteform">Note</label>
-                   <textarea
-                     name="noteform-note"
-                     id="noteform-note"
-                     value={this.state.note}
-                     onChange={evt => this.onChangeHandler(evt, "note")}
-                   />
-                 </div>
-                 <Modal.Actions>
-                   <Button
-                     color="green"
-                     inverted
-                     onClick={evt => this.updateNote()}
-                   >
-                     <Icon name="checkmark" /> Save
-                   </Button>
-                 </Modal.Actions>
-               </section>
-             </Modal>
-           );
-         }
-       }
-
-
+  render() {
+    return (
+      <Modal trigger={<Button>Edit</Button>} basic size="small">
+      
+        <form class="ui form">
+            <div class="field">
+              <input
+                type="text"
+                value={this.state.title}
+                onChange={evt => this.onFieldChange(evt, "title")}
+              />
+            </div>
+            <div class="field">
+              <textarea
+                value={this.state.note}
+                onChange={evt => this.onFieldChange(evt, "note")}
+                rows="3"
+              />
+              <div class="field"></div>
+            </div>
+          </form>
+          <Modal.Actions>
+            <Button color="green" inverted onClick={evt => this.onNoteUpdate()}>
+              <Icon name="checkmark" />Update
+            </Button>
+          </Modal.Actions>
+      </Modal>
+    );
+  }
+}
 
 export default EditNotesForm
 
