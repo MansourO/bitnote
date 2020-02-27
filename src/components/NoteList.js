@@ -1,3 +1,8 @@
+/*
+** React Component: NoteList
+** Purpose: Support behavior to display all notes in the system with additional support for mark down
+*/
+
 import React, { Component } from "react";
 import * as firebase from "firebase";
 import EditNotesForm from "./EditNotesForm";
@@ -17,7 +22,6 @@ export class NoteList extends Component {
   }
 
   onRemoveNote = (id) => {
-
     this.db.ref("notes")
         .child(id).remove();
 
@@ -25,13 +29,10 @@ export class NoteList extends Component {
     this.setState({ 
       notes: notes 
     });
-
   }
 
   onSearchChange = (evt) => {
-
     let searchValue = evt.target.value;
-
     let notes = this.props.notes.filter(
       note => note.title.includes(searchValue) || note.note.includes(searchValue)
     );
@@ -41,12 +42,10 @@ export class NoteList extends Component {
       search: searchValue
     });
   }
-
   
   onKeyPressed = (event) => {
     if (event.key === "Enter") {
       if(this.state.notes.length == 0) {
-
         let notes = []
         let newNote = { 
           id: 0, 
@@ -73,8 +72,6 @@ export class NoteList extends Component {
           <div className="ui big icon input">
             <input
               type="text"
-              id="search-bar"
-              name="search-bar"
               value={this.state.search}
               onChange={evt => this.onSearchChange(evt, "search")}
               onKeyPress={this.onKeyPressed}
@@ -88,11 +85,8 @@ export class NoteList extends Component {
             <div className="note" key={note.id}>
               <div className="note-title">
                 <h3>{note.title}</h3>
-                <div
-                  className="remove"
-                  onClick={() => this.onRemoveNote(note.id)}
-                >
-                  x
+                <div className="remove" onClick={() => this.onRemoveNote(note.id)}>
+                x
                 </div>
               </div>
               <div className="note-content">

@@ -1,3 +1,8 @@
+/*
+** React Component: AddNotesForms
+** Purpose: Support behavior to add new notes to teh application
+*/
+
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { Button, Header, Icon, Modal } from "semantic-ui-react";

@@ -1,3 +1,8 @@
+/*
+** React Component: EditNotesForms
+** Purpose: Support behavior to edit existing notes in the application
+*/
+
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
